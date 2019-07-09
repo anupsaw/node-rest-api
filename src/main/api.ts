@@ -1,14 +1,17 @@
 import { Router, Request, Response, Application, NextFunction } from 'express';
+import { Sensors } from './sensor/controllers/sensors';
 
 export class AppApi {
 
     public static init(app: Application) {
         const api = new AppApi();
-        const router = Router();
+        //const router = Router();
 
         // api's routes goes here
+        app.use('/sensors', Sensors.routes());
 
-        app.use(router);
+
+        // Error Handling
         app.use('**', api.notFound);
         app.use(api.logError);
         app.use(api.hanldeError);
